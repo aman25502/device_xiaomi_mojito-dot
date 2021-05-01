@@ -5,4 +5,8 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/aosp_mojito.mk
+    $(LOCAL_DIR)/dot_mojito.mk
+
+COMMON_LUNCH_CHOICES := \
+    dot_mojito-userdebug \
+    dot_mojito-user
