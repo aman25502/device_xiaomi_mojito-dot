@@ -27,6 +27,9 @@ TARGET_OTA_ASSERT_DEVICE := mojito,sunny
 # APEX image
 DEXPREOPT_GENERATE_APEX_IMAGE := true
 
+#DUP
+BUILD_BROKEN_DUP_RULES := true
+
 # A/B
 AB_OTA_UPDATER := true
 
