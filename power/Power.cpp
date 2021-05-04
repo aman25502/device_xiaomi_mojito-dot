@@ -33,8 +33,6 @@
 #include "Power.h"
 
 #include <android-base/file.h>
-#include <fcntl.h>
-
 #include <android-base/logging.h>
 
 #include <aidl/android/hardware/power/BnPower.h>
@@ -42,8 +40,6 @@
 #include <android-base/logging.h>
 #include <android/binder_manager.h>
 #include <android/binder_process.h>
-
-#include <linux/input.h>
 
 using ::aidl::android::hardware::power::BnPower;
 using ::aidl::android::hardware::power::IPower;
@@ -58,8 +54,6 @@ namespace android {
 namespace hardware {
 namespace power {
 namespace impl {
-
-static ::android::sp<ITouchFeature> gTouchFeatureService = nullptr;
 
 void setInteractive(bool interactive) {
    set_interactive(interactive ? 1:0);
@@ -83,11 +77,6 @@ ndk::ScopedAStatus Power::setMode(Mode type, bool enabled) {
         case Mode::DOUBLE_TAP_TO_WAKE:
             set_feature(enabled ? 1 : 0);
             break;
-            {
-            if (!gTouchFeatureService) {
-            gTouchFeatureService = ITouchFeature::getService();
-            } gTouchFeatureService->setTouchMode(14, enabled ? 1 : 0);
-            } break;
         case Mode::LOW_POWER:
         case Mode::LAUNCH:
         case Mode::EXPENSIVE_RENDERING:
@@ -124,7 +113,6 @@ ndk::ScopedAStatus Power::isModeSupported(Mode type, bool* _aidl_return) {
         case Mode::INTERACTIVE:
         case Mode::SUSTAINED_PERFORMANCE:
         case Mode::FIXED_PERFORMANCE:
-        case Mode::DOUBLE_TAP_TO_WAKE:
             *_aidl_return = true;
             break;
         default:
