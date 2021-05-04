@@ -50,6 +50,7 @@ void property_override(string prop, string value)
     else
         __system_property_add(prop.c_str(), prop.size(), value.c_str(), value.size());
 }
+};
 
 /* From Magisk@jni/magiskhide/hide_utils.c */
 static const char *snet_prop_key[] = {
@@ -95,8 +96,7 @@ static const char *snet_prop_key[] = {
     chmod("/sys/fs/selinux/policy", 0440);
 }
 
-void vendor_load_properties()
-{
+void vendor_load_properties() {
     string device, model;
 
     string hwname = GetProperty("ro.boot.hwname", "");
@@ -107,14 +107,17 @@ void vendor_load_properties()
     } else {
         device = "mojito";
         model = "M2101K7AG";
-    }
-   
-   }
+            
+            }
+        }       
 
     // SafetyNet workaround
     fingerprint = "Xiaomi/dipper/dipper:8.1.0/OPM1.171019.011/V9.5.5.0.OEAMIFA:user/release-keys";
     description = "dipper-user 8.1.0 OPM1.171019.011 V9.5.5.0.OEAMIFA release-keys";
     workaround_snet_properties();
+
+            }
+        }
 
     // Override all partitions' props
     string prop_partitions[] = { "", "odm.", "product.", "system.", "system_ext.", "vendor." };
@@ -124,8 +127,12 @@ void vendor_load_properties()
         property_override(string("ro.product.") + prop + string("name"), device);
         property_override(string("ro.product.") + prop + string("model"), model);
         property_override(string("ro.") + prop + string("build.product"), device);
-    }
+       
+            }
+        }       
 
     // Set hardware SKU prop
     property_override("ro.boot.product.hardware.sku", device);
+
+    }
 }
