@@ -5,8 +5,8 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/descendant_mojito.mk
+    $(LOCAL_DIR)/bliss_mojito.mk
 
 COMMON_LUNCH_CHOICES := \
-    descendant_mojito-userdebug \
-    descendant_mojito-user
+    bliss_mojito-userdebug \
+    bliss_mojito-user
